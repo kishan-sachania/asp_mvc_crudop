@@ -1,0 +1,70 @@
+﻿@using System.Data
+@model DataTable
+@{
+    ViewData["Title"] = "Country List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <a class="btn btn-success" asp-controller="Country" asp-action="Add">Add New Country</a>
+    <br />
+    <div class="row container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Country Name</th>
+
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @*Iterate through every Row of Data Table*@
+                @{
+                     if(Model.Rows.Count > 0)
+                        foreach (DataRow dr in Model.Rows)
+                        {
+                            <tr>
+                                <td>@dr["CountryName"]</td>
+                                <td>
+                                    <form method="post" asp-controller="Country" asp-action="DeleteCountry">
+                                        <input type="hidden" name="CountryID" value="@dr["CountryID"]">
+                                        <button type="submit" class="btn btn-danger btn-xs">Delete
+                                        </button>
+                                        <a class="btn btn-info btn-xs" asp-controller="Country"
+                                           asp-action="Add" asp-route-CountryID="@dr["CountryID"]">
+                                            Edit
+                                        </a>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    else
+                    {
+                        <tr>
+                            <td colspan="5" class="text-center">
+                                <p class="col-form-label">No Record Found</p>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+@section Scripts
+    {
+    <script>
+        function fun1() {
+            if (confirm("Are you sure you want to delete?")) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+    </script>
+    }

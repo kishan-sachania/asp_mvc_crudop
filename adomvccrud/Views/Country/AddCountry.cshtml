@@ -1,0 +1,35 @@
+﻿@model CountryModel
+
+@{
+}
+
+<h3>State Add/Edit </h3>
+<hr />
+<div class="form-row">
+    <form role="form" method="post" asp-controller="Country" asp-action="Save">
+        
+        
+        <div class="form-group">
+            <div class="form-group col-md-6">
+                <label for="inputCity"><span class="text-danger">*</span>Country Name</label>
+                <input type="text" class="form-control" placeholder="Enter Country Name"
+                       asp-for="CountryName">
+                <span asp-validation-for="CountryName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="form-group col-md-6">
+                <label for="inputCity"><span class="text-danger">*</span>Country Code</label>
+                <input type="text" class="form-control" placeholder="Enter Country Code"
+                       asp-for="CountryCode">
+                <span asp-validation-for="CountryCode" class="text-danger"></span>
+            </div>
+        </div>
+        <br />
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a class="btn btn-danger" asp-controller="Country" asp-action="CountryList">Cancel</a>
+    </form>
+</div>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial.cshtml" />
+}
